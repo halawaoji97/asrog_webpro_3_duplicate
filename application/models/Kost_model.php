@@ -15,8 +15,8 @@ class Kost_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('kategori');
+        $this->db->join('kost', 'kost.kode_kost = kategori.kode_kost');
         $this->db->where('kost.kode_kost', $id);
-        $this->db->join('kost', 'kost.kode_kost = kategori.kode_kost', 'left');
         $query = $this->db->get()->row_array();
         return $query;
     }

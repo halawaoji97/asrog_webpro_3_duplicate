@@ -106,25 +106,25 @@ class Auth extends CI_Controller
                 'status'        => 'Member',
                 'password'      => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id'       => 2,
-                'is_active'     => 0,
+                'is_active'     => 1,
                 'date_created'  => time()
             ];
 
             // PREPARE TOKEN
-            $token = base64_encode(random_bytes(32));
-            $user_token = [
-                'email' => $email,
-                'token' => $token,
-                'date_created' => time()
-            ];
+            // $token = base64_encode(random_bytes(32));
+            // $user_token = [
+            //     'email' => $email,
+            //     'token' => $token,
+            //     'date_created' => time()
+            // ];
 
 
             // SEND EMAIL
-            $this->_sendEmail($token, 'verify');
+            // $this->_sendEmail($token, 'verify');
 
             // INSERT INTO DB
             $this->db->insert('user', $data);
-            $this->db->insert('user_token', $user_token);
+            // $this->db->insert('user_token', $user_token);
 
             // SET FLASHDATA
             $this->session->set_flashdata('message', '<div class="message message-success">Successfully registered, please activate your account! </div>');

@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/'); ?>index.css">
     <title>Detail Booking</title>
     <style>
-        /* 100E3B primary */
-        /* F8C500 yellow */
-        /* FA4400 orange */
-        /* F2FBFF lightblue */
         .container {
             border-radius: 12px;
             border: 1px solid grey;
@@ -132,42 +128,34 @@
             <div class="name">
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name" value="<?= $transaksi['name']; ?>" readonly>
-                <?= form_error('name', ' <small class="text-danger">', '</small>'); ?>
             </div>
             <div class="telp">
                 <label for="phone">Phone</label>
                 <input type="number" id="phone" name="phone" value="<?= $transaksi['telp']; ?>" style="background-color: white;" readonly>
-                <?= form_error('phone', ' <small class="text-danger">', '</small>'); ?>
             </div>
             <div class="email">
                 <label for="name">Name</label>
                 <input type="text" name="email" id="email" value="<?= $transaksi['email']; ?>" readonly>
-                <?= form_error('email', ' <small class="text-danger">', '</small>'); ?>
             </div>
             <div class="address">
                 <label for="address">Address</label>
                 <input type="text" name="address" id="address" value="<?= $transaksi['address']; ?>" readonly>
-                <?= form_error('address', ' <small class="text-danger">', '</small>'); ?>
             </div>
             <div class="kost">
                 <label for="kost">Kost</label>
                 <input type="text" name="kost" id="kost" value="<?= $transaksi['kost']; ?>" readonly>
-                <?= form_error('kost', ' <small class="text-danger">', '</small>'); ?>
             </div>
             <div class="full_address">
                 <label for="full_address">Full Address</label>
                 <input type="text" name="full_address" id="full_address" value="<?= $transaksi['kost_location']; ?>" readonly>
-                <?= form_error('full_address', ' <small class="text-danger">', '</small>'); ?>
             </div>
             <div class="price">
                 <label for="price">Price</label>
                 <input type="text" name="price" id="price" value="<?= number_format($transaksi['price']); ?>" readonly>
-                <?= form_error('price', ' <small class="text-danger">', '</small>'); ?>
             </div>
             <div class="date">
                 <label for="dateOfEntry">Date Of Entry</label>
-                <input type="text" name="dateOfEntry" id="datepicker" value="<?= date('d F Y', strtotime(str_replace('/', '-', $transaksi['date']))); ?>" readonly>
-                <?= form_error('dateOfEntry', ' <small class="text-danger">', '</small>'); ?>
+                <input type="text" name="price" id="price" value="<?= $transaksi['date']; ?>" readonly>
             </div>
             <div class="picture-input">
                 <label for="proof">Payment Status</label>
@@ -176,6 +164,11 @@
             <div class="footer-card">
                 <div class="chat" style="margin-top: 40px;">
                     <a href="<?= base_url('home'); ?>">Back to Home</a>
+                </div>
+            </div>
+            <div class="footer-card">
+                <div class="chat" style="margin-top: 40px;">
+                    <a href="<?= base_url('auth'); ?>">Go to Profile</a>
                 </div>
             </div>
         </form>
