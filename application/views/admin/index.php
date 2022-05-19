@@ -64,33 +64,40 @@
 
         <div class="table-payment">
             <div class="box">
-                <div class="title">The payment of this month</div>
-                <p style="margin-bottom: 10px;">this payment table is manually updated by admin.</p>
+                <div class="title">The last booking of this month</div>
+                <p style="margin-bottom: 10px;">this booking table can be updated by clicking the booking menu.</p>
                 <table>
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
-                            <th scope="col">Due Date</th>
+                            <th scope="col">Start Date</th>
                             <th scope="col">Pay Date</th>
                             <th scope="col">Amount(Rp)</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Status Payment</th>
+                            <th scope="col">Status Booking</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($transaksi as $t) : ?>
                             <tr>
                                 <td data-label="Name"><?= $t['name']; ?></td>
-                                <td data-label="Due Date">
-                                    <?php
-                                    $now = time();
-                                    $days_this_month = date("t", time());
-                                    $end_of_month = strtotime(date("Y-m-t", time()));
-                                    ?>
-                                    <?= date('Y-m-d', $end_of_month); ?>
+                                <td data-label="Start Date">
+                                    <?= date('d F Y', strtotime($t['start_date'])); ?>
                                 </td>
-                                <td data-label="Pay Date"><?= date('Y-m-d', $t['date_created']); ?></td>
+                                <td data-label="Pay Date">
+                                    <?= date('d F Y', ($t['date_created'])); ?>
+                                </td>
                                 <td data-label="Amount"><?= number_format($t['price']); ?></td>
-                                <td data-label="Status">Lunas</td>
+                                <td data-label="Status Payment">
+                                    <?php if ($t['status'] !== '') : ?>
+                                        <span class="badge badge-danger">Paid</span>
+                                    <?php else : ?>
+                                        <span class="badge badge-success">Unpaid</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td data-label="Status Booking">
+                                    <?= $t['status']; ?>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
