@@ -38,32 +38,5 @@
                 </div>
             </div>
         </div>
-
-        <div class="table-payment">
-            <div class="box">
-                <table>
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Kost</th>
-                            <th scope="col">Kost Location</th>
-                            <th scope="col">Amount(Rp)</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">Status Booking</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="Name"><?= $user['name']; ?></td>
-                            <td data-label="Kost"><?= $user['kost']; ?></td>
-                            <td data-label="Kost Location"><?= $user['kost_location']; ?></td>
-                            <td data-label="Amount(Rp)"><?= $user['price']; ?> / month</td>
-                            <td data-label="Start Date"><?= $user['startDate']; ?></td>
-                            <td data-label="Status Booking"><?= $user['status_booking']; ?></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
 </section>

@@ -13,10 +13,9 @@ class Kost_model extends CI_Model
 
     public function detail_kost($id)
     {
-
         $this->db->select('*');
-        $this->db->from('kost');
-        $this->db->join('kategori', 'kost.kode_kost = kategori.kode_kost');
+        $this->db->from('kategori');
+        $this->db->join('kost', 'kost.kode_kost = kategori.kode_kost');
         $this->db->where('kost.kode_kost', $id);
         $query = $this->db->get()->row_array();
         return $query;

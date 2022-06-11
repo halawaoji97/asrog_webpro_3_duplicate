@@ -168,7 +168,7 @@
         </div>
         <div class="price">
             <label for="price">Price</label>
-            <input type="text" name="price" id="price" value="<?= $detail['price']; ?>" readonly>
+            <input type="text" name="price" id="price" value="<?= number_format($detail['price']); ?>" readonly>
             <?= form_error('price', ' <small class="text-danger">', '</small>'); ?>
         </div>
         <div class="date">

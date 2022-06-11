@@ -155,7 +155,7 @@
             </div>
             <div class="date">
                 <label for="dateOfEntry">Date Of Entry</label>
-                <input type="text" name="dateOfEntry" id="dateOfEntry" value="<?= $transaksi['start_date']; ?>" readonly>
+                <input type="text" name="price" id="price" value="<?= $transaksi['date']; ?>" readonly>
             </div>
             <div class="picture-input">
                 <label for="proof">Payment Status</label>

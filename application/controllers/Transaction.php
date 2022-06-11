@@ -3,49 +3,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Transaction extends CI_Controller
 {
-    public function index()
-    {
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['transaksi'] = $this->db->get('transaksi')->result_array();
-
-        $data['title'] = 'Dashboard';
-        $this->load->view('templates/dashboard_header', $data);
-        $this->load->view('templates/dashboard_sidebar', $data);
-        $this->load->view('booking/index', $data);
-        $this->load->view('templates/dashboard_footer');
-    }
     public function booking()
     {
         $this->form_validation->set_rules('dateOfEntry', 'Date Of Entry', 'required|trim');
-        // $this->form_validation->set_rules('proof', 'Payment Image', 'required|trim');
 
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $isLogin = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $kost_id = $this->uri->segment(3);
         $data['detail'] = $this->kost_model->detail_kost($kost_id);
+        var_dump($data['detail']);
+        // var_dump($data['user']);
         $data['title'] = 'Form booking';
 
         if ($isLogin) {
             if ($this->form_validation->run() == false) {
                 $this->load->view('detail/booking_kost', $data);
             } else {
-                $uploadImage = $_FILES['proof']['name'];
-
-                if ($uploadImage) {
-                    $config['upload_path'] = './assets/images/proof/';
-                    $config['allowed_types'] = 'jpg|jpeg|png';
-                    $config['max_size']     = '2048';
-
-                    $this->load->library('upload', $config);
-
-                    if ($this->upload->do_upload('proof')) {
-                        $new_image = $this->upload->data('file_name');
-                        $this->db->set('payment_image', $new_image);
-                    } else {
-                        echo $this->upload->display_errors();
-                    }
-                }
-
+                // PREPARE DATA
+                // $id = $this->input->post('id');
+                // $kost = htmlspecialchars($this->input->post('kost', true));
                 $data = [
                     'name'          => htmlspecialchars($this->input->post('name', true)),
                     'telp'          => htmlspecialchars($this->input->post('phone', true)),
@@ -54,9 +30,8 @@ class Transaction extends CI_Controller
                     'kost'          => htmlspecialchars($this->input->post('kost', true)),
                     'kost_location' => htmlspecialchars($this->input->post('full_address', true)),
                     'price'         => htmlspecialchars($this->input->post('price', true)),
-                    'start_date'          => $this->input->post('dateOfEntry', true),
-                    'payment_image'         => $uploadImage,
-                    'status'        => 'process',
+                    'date'          => $this->input->post('dateOfEntry', true),
+                    'payment_image'         => 'proof of payment',
                     'date_created'  => time()
                 ];
 
@@ -65,7 +40,6 @@ class Transaction extends CI_Controller
                     'kost_location' => htmlspecialchars($this->input->post('full_address', true)),
                     'price'         => htmlspecialchars($this->input->post('price', true)),
                     'startDate'          => $this->input->post('dateOfEntry', true),
-                    'status_booking'         => 'process',
                 ];
 
 
@@ -97,32 +71,5 @@ class Transaction extends CI_Controller
 
         $this->load->view('detail/success_booking', $data);
         // update kost user 
-    }
-
-    public function confirm()
-    {
-
-        $this->db->set('status', 'Confirm');
-        $this->db->where('id', $this->uri->segment(3));
-        $this->db->update('transaksi');
-
-        $this->db->set('status_booking', 'Confirmed');
-        $this->db->where('email', $this->session->userdata('email'));
-        $this->db->update('user');
-
-        redirect('transaction/index');
-    }
-
-    public function reject()
-    {
-        $this->db->set('status', 'Reject');
-        $this->db->where('id', $this->uri->segment(3));
-        $this->db->update('transaksi');
-
-        $this->db->set('status_booking', 'Rejected');
-        $this->db->where('email', $this->session->userdata('email'));
-        $this->db->update('user');
-
-        redirect('transaction/index');
     }
 }

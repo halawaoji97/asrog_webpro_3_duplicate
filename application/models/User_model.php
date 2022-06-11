@@ -51,4 +51,5 @@ class User_model extends CI_Model
         $this->db->where($where);
         $this->db->update($table, $data);
     }
+
 }
